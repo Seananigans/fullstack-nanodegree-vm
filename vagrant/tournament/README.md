@@ -1,20 +1,39 @@
-Clear all scores from a tournament to restart the tournament with the same players by using:
-deleteMatches()
+# Tournament Results
+This repository uses postgresql to manage a Swiss tournament style tracking.
 
-Clear the tournament to start with new players by using:
-deletePlayers()
+## Installation
 
-Register Players in a tournament using:
-registerPlayer(player_name)
 
-Count the number of players using:
-countPlayers()
 
-Get the player standings using:
-playerStandings()
+## Usage
 
-Update the tournament results by reporting the winner and loser of a match using:
-reportMatch(id_of_winner, id_of_loser)
+First create the database by starting up posgresql and executing the following command:
+`CREATE DATABASE tournament;`
 
-Get the pairings for the next matches using:
-swissPairings()
+Set up the tables in the database by running the code in `tournament.sql`.
+
+Then test the program using:
+`python tournament_test.py`
+
+The test program should verify that the below functions are working properly.
+
+* deleteMatches()
+	- Clear all scores from a tournament to restart the tournament with the same players.
+
+* deletePlayers()
+	- Clear the tournament to start with new players.
+
+* registerPlayer(player_name)
+	- Register a player in the tournament.
+
+* countPlayers()
+	- Count the number of players in the tournament.
+
+* playerStandings()
+	- Get the player standings.
+
+* reportMatch(id_of_winner, id_of_loser)
+	- Update the tournament results by reporting the winner and loser of a match.
+
+* swissPairings()
+	- Get the pairings for the next matches.
