@@ -3,16 +3,22 @@ This repository uses postgresql to manage a Swiss tournament style tracking.
 
 ## Installation
 
+Clone this repository using:
+
+`git clone https://github.com/Seananigans/fullstack-nanodegree-vm.git`
 
 
 ## Usage
 
 First create the database by starting up posgresql and executing the following command:
+
 `CREATE DATABASE tournament;`
 
 Set up the tables in the database by running the code in `tournament.sql`.
 
+
 Then test the program using:
+
 `python tournament_test.py`
 
 The test program should verify that the below functions are working properly.
