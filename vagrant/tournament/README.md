@@ -10,36 +10,40 @@ Clone this repository using:
 
 ## Usage
 
-First create the database by starting up posgresql and executing the following command:
+1. First change into the tournament directory:
 
-`CREATE DATABASE tournament;`
+	`~/fullstack-nanodegree-vm/vagrant/tournament`
 
-Set up the tables in the database by running the code in `tournament.sql`.
+2. Second create the database by starting up posgresql and executing the following command:
+
+	`CREATE DATABASE tournament;`
+
+3. Set up the tables in the database by running the code in `tournament.sql`.
 
 
-Then test the program using:
+4. Then test the program using:
 
-`python tournament_test.py`
+	`python tournament_test.py`
 
-The test program should verify that the below functions are working properly.
+5. The test program should verify that the below functions are working properly.
 
-* deleteMatches()
-	- Clear all scores from a tournament to restart the tournament with the same players.
+	* deleteMatches()
+		- Clear all scores from a tournament to restart the tournament with the same players.
 
-* deletePlayers()
-	- Clear the tournament to start with new players.
+	* deletePlayers()
+		- Clear the tournament to start with new players.
 
-* registerPlayer(player_name)
-	- Register a player in the tournament.
+	* registerPlayer(player_name)
+		- Register a player in the tournament.
 
-* countPlayers()
-	- Count the number of players in the tournament.
+	* countPlayers()
+		- Count the number of players in the tournament.
 
-* playerStandings()
-	- Get the player standings.
+	* playerStandings()
+		- Get the player standings.
 
-* reportMatch(id_of_winner, id_of_loser)
-	- Update the tournament results by reporting the winner and loser of a match.
+	* reportMatch(id_of_winner, id_of_loser)
+		- Update the tournament results by reporting the winner and loser of a match.
 
-* swissPairings()
-	- Get the pairings for the next matches.
+	* swissPairings()
+		- Get the pairings for the next matches.
