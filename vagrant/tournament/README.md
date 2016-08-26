@@ -18,8 +18,9 @@ Clone this repository using:
 
 	`CREATE DATABASE tournament;`
 
-3. Set up the tables in the database by running the code in `tournament.sql`.
+3. Set up the tables in the database and tables by running:
 
+	`psql -f tournament.sql`
 
 4. Then test the program using:
 
