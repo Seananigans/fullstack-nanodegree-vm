@@ -4,7 +4,6 @@
 #
 
 import psycopg2
-from pprint import pprint
 
 def connect():
     """Connect to the PostgreSQL database.  Returns a database connection."""
@@ -19,7 +18,7 @@ def deleteMatches():
     DB = connect()
     c = DB.cursor()
 
-    query = "UPDATE tournament SET matches=0, wins=0;"
+    query = "DELETE FROM matches;"
     c.execute(query)
     DB.commit()
     DB.close()
@@ -30,7 +29,7 @@ def deletePlayers():
     DB = connect()
     c = DB.cursor()
 
-    query = "DELETE FROM tournament;"
+    query = "DELETE FROM players;"
     c.execute(query)
     DB.commit()
     DB.close()
@@ -41,7 +40,7 @@ def countPlayers():
     DB = connect()
     c = DB.cursor()
 
-    query = "SELECT COUNT(*) FROM tournament;"
+    query = "SELECT COUNT(*) FROM players;"
     c.execute(query)
     count = c.fetchone()[0]
     DB.close()
@@ -59,8 +58,8 @@ def registerPlayer(name):
     """
     DB = connect()
     c = DB.cursor()
-    query = "INSERT INTO tournament (player, wins, matches) VALUES (%s, %s, %s)"
-    c.execute(query, (name, 0, 0))
+    query = "INSERT INTO players (name) VALUES (%s)"
+    c.execute(query, (name, ))
     DB.commit()
     DB.close()
 
@@ -81,7 +80,7 @@ def playerStandings():
     DB = connect()
     c = DB.cursor()
 
-    query = "SELECT * FROM tournament ORDER BY wins DESC;"
+    query = "SELECT * FROM standings;"
     c.execute(query)
     standings = [row for row in c.fetchall()]
     DB.close()
@@ -98,20 +97,8 @@ def reportMatch(winner, loser):
     DB = connect()
     c = DB.cursor()
 
-    # Winner Update
-    query = "SELECT wins, matches FROM tournament WHERE id=%s;" 
-    c.execute(query, (winner,))
-    wins, matches = c.fetchone()
-    query = "UPDATE tournament SET wins=%s, matches=%s WHERE id=%s;"
-    c.execute(query, (wins+1, matches+1, winner))
-    DB.commit()
-
-    #Loser Update
-    query = "SELECT matches FROM tournament WHERE id=%s;"
-    c.execute(query, (loser,))
-    matches = c.fetchone()[0]
-    query = "UPDATE tournament SET matches=%s WHERE id=%s;"
-    c.execute(query, (matches+1, loser))
+    query = "INSERT INTO matches (winner, loser) VALUES (%s, %s);"
+    c.execute(query, (winner, loser))
     DB.commit()
 
     DB.close()
