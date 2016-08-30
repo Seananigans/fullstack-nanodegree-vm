@@ -32,6 +32,7 @@ print firstResult.name
 # 	print item.restaurant.name
 
 
+
 veggieBurgers = session.query(MenuItem).filter_by(name="Veggie Burger")
 for veggieBurger in veggieBurgers:
 	print veggieBurger.id
