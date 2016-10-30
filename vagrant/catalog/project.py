@@ -17,6 +17,7 @@ import json
 from time import sleep
 from flask import make_response
 import requests
+from app_secret import app_secret as apscret
 
 CLIENT_ID = json.loads(open('client_secrets.json', 'r').read())['web']['client_id']
 
@@ -479,6 +480,6 @@ def deleteRecipe(recipe_id):
 
 #RUN APPLICATION
 if __name__ == '__main__':
-    app.secret_key = "super_secret_key"
+    app.secret_key = apscret
     app.debug = True
     app.run(host='0.0.0.0', port=5000)
