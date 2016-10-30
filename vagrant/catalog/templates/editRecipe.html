@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Edit Recipe</h1>
+<br>
+<form action="{{ url_for('editRecipe', recipe_id=recipe.id) }}" method="post">
+	<label>Name:
+		<br>
+		<input type="text" size='30' name="name" value="{{recipe.name}}">
+	</label>
+	<br>
+	<br>
+	<label>Description:
+		<br>
+		<textarea type="text" size='30' name="description">{{recipe.description}}</textarea>
+	</label>
+	<br>
+	<br>
+	<label>Steps:
+		<br>
+		<textarea type="text" size='30' name="steps">{{recipe.steps}}</textarea>
+	</label>
+	<br>
+	<br>
+
+	<input type="submit" value="CHANGE">
+
+	<a href="{{url_for('viewRecipe', recipe_id=recipe.id) }}"><p class="cancel">CANCEL</p></a>
+
+</form>
+
+{% endblock %}

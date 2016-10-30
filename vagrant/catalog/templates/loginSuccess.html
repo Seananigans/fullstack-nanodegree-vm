@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Welcome, {{login_session['username']}}!</h1>
+"<img src="{{login_session['picture']}}" class="login-picture">
+
+{% endblock %}

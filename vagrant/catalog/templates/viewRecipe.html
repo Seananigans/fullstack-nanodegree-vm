@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>{{recipe.name}}</h1>
+
+{% with messages = get_flashed_messages() %}
+	{% if messages %}
+		<ul>
+			{% for message in messages %}
+			<li><strong> {{ message }} </strong></li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+{% endwith %}
+
+<div class="category-link">
+	<pre>{{recipe.description}}</pre>
+	<pre>{{recipe.steps}} </pre>
+	{% if login_session and recipe.user_id == login_session['user_id'] %}
+		<p class="link"><a href="{{ url_for('editRecipe', recipe_id=recipe.id) }}">Edit Recipe</a></p>
+		<p class="link"><a href="{{ url_for('deleteRecipe', recipe_id=recipe.id) }}">Delete Recipe</a></p>
+	{% endif %}
+</div>
+
+{% endblock %}

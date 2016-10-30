@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>{{category.name}}</h1>
+<h3>{{category.description}}</h3>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+
+<ul>
+	{% for message in messages %}
+	<li><strong> {{ message }} </strong></li>
+	{% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
+
+<div>
+{% if login_session and category.user_id == login_session['user_id'] %}
+	<p class="link change"><a href="{{ url_for('editCategory', category_id=category.id) }}">Edit Category</a></p>
+	<p class="link change"><a href="{{ url_for('deleteCategory', category_id=category.id) }}">Delete Category</a></p>
+{% endif %}
+{% if login_session %}
+	<p class="link change"><a href="{{ url_for('createRecipe', category_id=category.id)}}">Add a recipe of your own?</a></p>
+{% else %}
+	<p class="link change"><a href="{{ url_for('showLogin')}}">Sign in to add a recipe of your own?</a></p>
+{% endif %}
+</dir>
+
+{% for i in recipes %}
+	<div class="category-link">
+		<a href="{{ url_for('viewRecipe', recipe_id=i.id) }}"><p class="link">{{i.name}}</p></a>
+		<pre>{{i.description}}</pre>
+		<pre>{{i.steps}}</pre>
+		{% if i.user_id == login_session['user_id'] %}
+			<p class="link change"><a href="{{ url_for('editRecipe', recipe_id=i.id) }}">Edit Recipe</a></p>
+			<p class="link change"><a href="{{ url_for('deleteRecipe', recipe_id=i.id) }}">Delete Recipe</a></p>
+		{% endif %}
+	</div>
+
+{% endfor %}
+
+
+{% endblock %}

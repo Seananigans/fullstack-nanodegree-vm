@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row">
+	<div class="col-6">
+		<h2>Choose a category:</h2>
+	</div>
+	<div class="col-6 move-right">
+		{% if login_session %}
+		<h2 class="link"><a href="{{ url_for('createCategory') }}">... or Create a category</a></h2>
+		{% else %}
+		<h2 class="link"><a href="{{ url_for('showLogin') }}">Create A Category!</a></h2>
+		{% endif %}
+	</div>
+</div>
+
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul>
+	{% for message in messages %}
+	<li><strong> {{ message }} </strong></li>
+	{% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
+{% for i in categories %}
+	<div class="category-link">
+		<a href="{{ url_for('viewCategory', category_id=i.id) }}">
+			<strong>
+				<p>{{i.name}}</p>
+			</strong>
+		</a>
+		<pre>{{i.description}}</pre>
+		{% if login_session and i.user_id == login_session['user_id'] %}
+			<p class="link change"><a href="{{ url_for('editCategory', category_id=i.id) }}">Edit Category</a></p>
+			<p class="link change"><a href="{{ url_for('deleteCategory', category_id=i.id) }}">Delete Category</a></p>
+		{% endif %}
+	</div>
+{% endfor %}
+
+
+{% endblock %}
